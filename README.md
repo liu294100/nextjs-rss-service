@@ -2,7 +2,7 @@
 
 English / [简体中文](./README_CN.md)
 
-```markdown
+
 # Next.js RSS Aggregation Service Application
 
 This project creates a complete Next.js application that aggregates news from CNN Lite and transforms it into a standard RSS format.  It's designed with an extensible architecture, making it easy to add more news sources.
@@ -48,5 +48,5 @@ This ensures that RSS links and other URLs are generated correctly.
 This application is now ready to be deployed on any platform that supports Next.js, such as Vercel, Netlify, or your own server.
 
 You can adjust the HTML parsing logic of the source processors as needed to accommodate structural changes in different websites.  The code provides an implementation for CNN Lite and an example framework for BBC.
-```
+
 

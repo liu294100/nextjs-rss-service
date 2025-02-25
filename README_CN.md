@@ -1,4 +1,4 @@
-```markdown
+
 # Next.js RSS 转换服务应用
 
 创建了一个完整的 Next.js RSS 转换服务应用。这个应用允许你从 CNN Lite 获取新闻并将其转换为标准的 RSS 格式，同时设计了可扩展的架构，便于添加更多新闻源。
@@ -44,4 +44,4 @@ NEXT_PUBLIC_BASE_URL=https://your-domain.com
 这个应用现在已经准备好部署在任何支持 Next.js 的平台上，如 Vercel、Netlify 或自己的服务器。
 
 你可以根据需要调整源处理器的 HTML 解析逻辑，以适应不同网站的结构变化。代码中已提供了 CNN Lite 的实现和 BBC 的示例框架。
-```
+
