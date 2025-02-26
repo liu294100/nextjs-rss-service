@@ -4,7 +4,9 @@ import { NewsItem, SourceProcessor } from './types';
 import { parseRelativeDate } from '@/utils/parse-date'; // Import from your project
 import timezone from '@/utils/timezone'; // Import from your project
 
-const ZAOBAO_URL = 'https://www.zaobao.com.sg';
+//const ZAOBAO_URL = 'https://www.zaobao.com.sg'; 
+
+const ZAOBAO_URL = 'https://www.zaobao.com';
 
 export const zaobaoProcessor: SourceProcessor = {
     name: 'zaobao',
