@@ -8,10 +8,12 @@ export interface NewsItem {
   imageUrl?: string;
 }
 
+// In types.ts
 export interface SourceProcessor {
   name: string;
   displayName: string;
   description: string;
   websiteUrl: string;
+  section?: string; // Add this
   fetchFeed: () => Promise<NewsItem[]>;
 }
