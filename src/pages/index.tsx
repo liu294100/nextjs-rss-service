@@ -141,12 +141,12 @@ export default function Home({ sources, baseUrl }: HomeProps) {
 
   return (
     <div
+      className="pageShell"
       style={{
         minHeight: '100vh',
         background:
           'radial-gradient(circle at 0% 0%, #1e3a8a 0%, transparent 35%), radial-gradient(circle at 100% 0%, #7c3aed 0%, transparent 40%), #070b1a',
         color: '#f8fafc',
-        padding: '28px 16px 48px',
       }}
     >
       <Head>
@@ -154,8 +154,9 @@ export default function Home({ sources, baseUrl }: HomeProps) {
         <meta name="description" content="RSS feeds for various news websites" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ maxWidth: '1120px', margin: '0 auto' }}>
+      <main className="mainContainer">
         <section
+          className="heroSection"
           style={{
             borderRadius: '18px',
             padding: '24px',
@@ -164,7 +165,9 @@ export default function Home({ sources, baseUrl }: HomeProps) {
             boxShadow: '0 24px 60px rgba(0, 0, 0, 0.3)',
           }}
         >
-          <h1 style={{ margin: 0, fontSize: '30px', lineHeight: 1.2 }}>可用的 RSS 订阅源</h1>
+          <h1 className="heroTitle" style={{ margin: 0, lineHeight: 1.2 }}>
+            可用的 RSS 订阅源
+          </h1>
           <p style={{ margin: '10px 0 0 0', color: '#dbeafe' }}>按地区分类、支持实时筛选和全文搜索</p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '14px' }}>
             <span
@@ -193,6 +196,7 @@ export default function Home({ sources, baseUrl }: HomeProps) {
         </section>
 
         <section
+          className="filterSection"
           style={{
             marginTop: '20px',
             borderRadius: '16px',
@@ -200,9 +204,6 @@ export default function Home({ sources, baseUrl }: HomeProps) {
             background: 'rgba(15, 23, 42, 0.55)',
             border: '1px solid rgba(148,163,184,0.3)',
             backdropFilter: 'blur(12px)',
-            display: 'grid',
-            gridTemplateColumns: 'minmax(260px, 1fr) minmax(180px, 220px)',
-            gap: '12px',
           }}
         >
           <input
@@ -243,15 +244,9 @@ export default function Home({ sources, baseUrl }: HomeProps) {
         </section>
 
         {groupedSources.map((group) => (
-          <section key={group.section} style={{ marginTop: '22px' }}>
+          <section key={group.section} className="groupSection" style={{ marginTop: '22px' }}>
             <h2 style={{ marginBottom: '12px', fontSize: '20px' }}>{group.section}</h2>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                gap: '12px',
-              }}
-            >
+            <div className="cardsGrid">
               {group.sources.map((source) => (
                 <article
                   key={source.name}
@@ -268,8 +263,9 @@ export default function Home({ sources, baseUrl }: HomeProps) {
                   <p style={{ margin: '8px 0 0 0', color: '#cbd5e1', fontSize: '14px', minHeight: '38px' }}>
                     {source.description}
                   </p>
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
+                  <div className="actionRow" style={{ marginTop: '12px' }}>
                     <a
+                      className="cardAction"
                       href={`/api/rss/${source.name}`}
                       style={{
                         display: 'inline-block',
@@ -285,6 +281,7 @@ export default function Home({ sources, baseUrl }: HomeProps) {
                       获取 RSS
                     </a>
                     <a
+                      className="cardAction"
                       href={source.websiteUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -303,6 +300,7 @@ export default function Home({ sources, baseUrl }: HomeProps) {
                       访问网站
                     </a>
                     <button
+                      className="cardAction"
                       type="button"
                       onClick={() => handlePreview(source)}
                       style={{
@@ -322,6 +320,7 @@ export default function Home({ sources, baseUrl }: HomeProps) {
                   </div>
                   <div style={{ marginTop: '12px' }}>
                     <code
+                      className="rssEndpoint"
                       style={{
                         display: 'block',
                         borderRadius: '8px',
@@ -329,7 +328,6 @@ export default function Home({ sources, baseUrl }: HomeProps) {
                         border: '1px solid rgba(148,163,184,0.3)',
                         color: '#93c5fd',
                         padding: '8px 10px',
-                        fontSize: '12px',
                         overflowX: 'auto',
                         whiteSpace: 'nowrap',
                       }}
@@ -361,6 +359,7 @@ export default function Home({ sources, baseUrl }: HomeProps) {
       </main>
       {previewSourceName.length > 0 && (
         <div
+          className="previewMask"
           onClick={closePreview}
           style={{
             position: 'fixed',
@@ -370,7 +369,6 @@ export default function Home({ sources, baseUrl }: HomeProps) {
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 9999,
-            padding: '18px',
           }}
         >
           <div
@@ -430,6 +428,80 @@ export default function Home({ sources, baseUrl }: HomeProps) {
           </div>
         </div>
       )}
+      <style jsx>{`
+        .pageShell {
+          padding: 28px 16px 48px;
+        }
+        .mainContainer {
+          max-width: 1120px;
+          margin: 0 auto;
+        }
+        .heroTitle {
+          font-size: clamp(24px, 3.5vw, 34px);
+        }
+        .filterSection {
+          display: grid;
+          grid-template-columns: minmax(260px, 1fr) minmax(180px, 220px);
+          gap: 12px;
+        }
+        .cardsGrid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 12px;
+        }
+        .actionRow {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .rssEndpoint {
+          font-size: 12px;
+        }
+        @media (max-width: 1024px) {
+          .mainContainer {
+            max-width: 960px;
+          }
+          .cardsGrid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          }
+        }
+        @media (max-width: 768px) {
+          .pageShell {
+            padding: 20px 12px 32px;
+          }
+          .heroSection {
+            padding: 18px !important;
+          }
+          .filterSection {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+          .groupSection {
+            margin-top: 18px !important;
+          }
+          .cardsGrid {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          }
+          .previewMask {
+            padding: 8px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .cardsGrid {
+            grid-template-columns: 1fr;
+          }
+          .actionRow {
+            flex-direction: column;
+          }
+          .cardAction {
+            width: 100%;
+            text-align: center;
+          }
+          .rssEndpoint {
+            font-size: 11px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
